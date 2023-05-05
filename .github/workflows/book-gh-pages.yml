@@ -2,7 +2,7 @@ name: "Book GitHub Pages"
 
 on:
   push:
-    branches: [$default-branch]
+    branches: [main]
 
   # Allows running this workflow manually
   workflow_dispatch:
