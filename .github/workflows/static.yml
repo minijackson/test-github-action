@@ -18,7 +18,7 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
+  group: "pages2"
   cancel-in-progress: false
 
 jobs:
@@ -31,6 +31,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v20
+      - name: "Build documentation book"
+        run: nix build ".#book" --print-build-logs
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
