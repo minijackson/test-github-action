@@ -1,4 +1,4 @@
-name: update-flake-lock
+name: Update flake.lock
 on:
   workflow_dispatch: # allows manual triggering
   # schedule:
@@ -20,6 +20,7 @@ jobs:
       - uses: cachix/install-nix-action@ba0dd844c9180cbf77aa72a116d6fbc515d0e87b # v27
       - uses: DeterminateSystems/update-flake-lock@main
         with:
+          branch: "update-flake-lock/${{ matrix.branch }}"
           pr-title: "[${{ matrix.branch }}] Update flake.lock"
           pr-labels: |
             dependencies
