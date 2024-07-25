@@ -1,0 +1,25 @@
+name: update-flake-lock
+on:
+  workflow_dispatch: # allows manual triggering
+  # schedule:
+  #   - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
+
+jobs:
+  lockfile:
+    strategy:
+      matrix:
+        branch:
+          - main
+          - nixos-23.11
+          # - nixos-23.05
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+      - uses: cachix/install-nix-action@ba0dd844c9180cbf77aa72a116d6fbc515d0e87b # v27
+      - uses: DeterminateSystems/update-flake-lock@main
+        with:
+          pr-title: "[${{ matrix.branch }}] Update flake.lock"
+          pr-labels: |
+            dependencies
