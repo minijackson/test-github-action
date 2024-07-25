@@ -4,6 +4,14 @@ on:
   # schedule:
   #   - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
 
+# WARNING:
+# When extending this action, be aware that $GITHUB_TOKEN allows write access to
+# the GitHub repository. This means that it should not evaluate user input in a
+# way that allows code injection.
+
+permissions:
+  contents: read
+
 jobs:
   lockfile:
     strategy:
@@ -12,6 +20,9 @@ jobs:
           - main
           - nixos-23.11
           # - nixos-23.05
+    permissions:
+      contents: write # to create branch
+      pull-requests: write # to create PR to backport
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
