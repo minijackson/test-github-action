@@ -30,7 +30,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Install Nix
-        uses: cachix/install-nix-action@V27
+        uses: cachix/install-nix-action@V28
       - name: "Build documentation book"
         run: |
           nix build '.#book' --print-build-logs
